@@ -1,6 +1,7 @@
 use std::io::BufReader;
 use std::io::Read;
 use std::fs::File;
+use std::cmp;
 
 use crate::util::error::CatchAllError;
 
@@ -59,16 +60,14 @@ where
 {
     let board_size = init_poss.iter().max()
         .ok_or(CatchAllError::new("no positions input".to_string()))?;
-    let mut end_pos_costs = Vec::<i64>::with_capacity(board_size + 1);
+    let mut min_cost: i64 = i64::MAX;
     for end_pos in 0..=*board_size {
-        end_pos_costs.push(0);
+        let mut cur_cost = 0;
         for init_pos in init_poss {
-            end_pos_costs[end_pos] += cost_calc(*init_pos,end_pos);
+            cur_cost += cost_calc(*init_pos,end_pos);
         }
+        min_cost = cmp::min(min_cost, cur_cost);
     }
 
-    let min_cost = end_pos_costs.iter().min()
-        .ok_or(CatchAllError::new("no positions input".to_string()))?;
-
-    Ok(*min_cost)
+    Ok(min_cost)
 }
