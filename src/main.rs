@@ -14,6 +14,7 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 use crate::day1::run as run_day_1;
 use crate::day2::run as run_day_2;
@@ -21,6 +22,7 @@ use crate::day3::run as run_day_3;
 use crate::day4::run as run_day_4;
 use crate::day5::run as run_day_5;
 use crate::day6::run as run_day_6;
+use crate::day7::run as run_day_7;
 
 
 fn main() -> Result<(), CatchAllError> {
@@ -56,6 +58,7 @@ fn main() -> Result<(), CatchAllError> {
         4 => Ok(run_day_4(input_reader)),
         5 => Ok(run_day_5(input_reader)),
         6 => Ok(run_day_6(input_reader)),
+        7 => Ok(run_day_7(input_reader)),
         _ => Err(CatchAllError::new("unknown day number".to_string()))
     }
 }
